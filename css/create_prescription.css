@@ -1,0 +1,201 @@
+html, body {
+    min-height: 100%;
+}
+
+#mic-btn {
+    width: 130px;
+    height: 130px; /* 20vh; */
+    font-size: 50px;
+    align-self: center;
+    background-color: red;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 100px;
+}
+
+.fa-microphone-lines {
+    animation: 1s infinite glowing;
+}
+
+@keyframes glowing {
+    from {
+        text-shadow: 0px 0px 20px yellow;    
+    }
+
+    to {
+        text-shadow: 0px 0px 2px yellow;    
+    }
+}
+
+#med-search {
+    width: 50%;
+    margin-top: 30px;
+    height: 50px;
+    align-self:center;
+    border: 5px groove gray;
+    border-radius: 20px;
+    font-size: 25px;
+}
+
+#dropdown-input {
+    display: flex;
+    flex-direction: column;
+}
+
+#med-dropdown {
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    width: 50%;
+    margin-top: 90px;
+}
+
+.img-max {
+    max-height: 10vh;
+    max-width: 20vh;
+    margin-right: 20px;
+}
+
+.table-item-img {
+    margin-right: 0px;
+}
+
+.dropdown-element {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    margin-top: 1px;
+    align-self: center;
+    height: 70px;
+    width: 98%;
+    background-color: white;
+    z-index: 1;
+    cursor: pointer;
+    border: 3px inset black;
+    border-radius: 30px;
+    padding: 12px 12px;
+}
+
+.drop-elem-text {
+    align-self: center;
+    margin: 0 auto;
+    word-break: break-all;
+    font-size: 20px;
+}
+
+#prescription-table {
+    width: 100%;
+    border: 5px solid lightgreen;
+    margin: 0 auto;
+}
+
+#prescription-table th {
+    text-align: center;
+}
+
+#prescription-table tr:not(:first-child) {
+    height: 105px;
+}
+
+#prescription-table td {
+    text-align: center;
+    border: 2px solid black;
+    border-spacing: 3px;
+    border-collapse: separate;
+    font-size: 20px;
+}
+
+#prescription-table td.item {
+    width: 60%;
+}
+
+/*
+#prescription-table td.name {
+    word-break: break-word;
+    width: 45%;
+}
+*/
+
+#prescription-table td.price {
+    position: relative;
+    vertical-align: top;
+    word-break: break-word;
+    width: 25%;
+    /* min-width: 50px; */
+}
+
+.cross {
+    float: right;
+    font-size: 16px;
+    width: 16px;
+    padding: 5px;
+    background-color: red;
+    color: white;
+    border-radius: 60px;
+}
+
+.price-text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+#generate-button {
+    width: 30%;
+    background-color: red;
+    color: white;
+    font-size: 30px;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    #med-search {
+        width: 90%;
+    }
+ 
+    #med-dropdown {
+        width: 90%;
+    }
+
+    .dropdown-element {
+        height: 70px;
+        width: 95%;
+    }
+
+    .img-max {
+        max-height: 70px;
+    }
+
+    #prescription-table td {
+        font-size: 20px;
+    }
+   
+    #generate-button {
+        width: 80%;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .cross {
+        font-size: 10px;
+        width: 10px;
+    }
+
+}
+
+@media (max-width: 300px) {
+    
+    .img-max {
+        max-height: 50px;
+    }
+
+    #prescription-table td {
+        font-size: 18px;
+    }
+}

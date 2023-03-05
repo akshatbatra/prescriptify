@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+<title>Create Prescription</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src="/js/create_prescription.js"></script>
+<link rel="stylesheet" href="/css/main.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+<link href="/css/create_prescription.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="strip" id="header">
+<span id="logo" onclick="document.location.href = document.location.origin;">Prescriptify</span>
+<span id="prototype">Prototype v1</span>
+</div>
+<hr id="separator">
+<hr id="separator">
+</div>
+
+<div id="main-content">
+
+<button id="mic-btn" onclick="toggleListening(this.children[0]);"><i id="microphone" class="fa-solid fa-microphone-lines-slash fa-xl"></i></button>
+
+<div id="dropdown-input">
+<input type="text" id="med-search"></input>
+
+<div id="med-dropdown">
+
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<span id="footer-text">© Akshat Batra 2023</span>
+</div>
+
+<script>
+document.getElementById("med-search").addEventListener("input" , suggestions);
+</script>
+</body>
+</html>

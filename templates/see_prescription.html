@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+<title>See Prescription</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/create_prescription.css">
+<link rel="stylesheet" href="/css/see_prescription.css">
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+<div class="strip" id="header">
+<span id="logo" onclick="document.location.href = document.location.origin;">Prescriptify</span>
+<span id="prototype">Prototype v1</span>
+</div>
+<hr id="separator">
+<hr id="separator">
+<div id="main-content">
+<input type="hidden" name="prescription-id" value="{{ .PrescriptionId }}"></input>
+<div id="qr-pricing">
+{{ if .FromCreatePrescription }}
+    <video id="scanner"></video>
+{{ end }}
+<div id="qr-code"></div>
+<a id="pricing-box"></a>
+{{ if .FromCreatePrescription }}
+    <button id="link-aadhaar-button">Link with QR/ Aadhaar</button>
+{{ end }}
+</div>
+<table id="prescription-table">
+<tr>
+<th>Item</th>
+<!-- <th>Name</th> -->
+<th>Quantity</th>
+<th>Price</th>
+</tr>
+{{ range $i := .PrescriptionDataList }}
+<tr>
+    <td class="item"><img src='{{$i.ImgLink}}' class='img-max table-item-img'></img><br>{{$i.Name}}</td>
+    <!-- <td class="name">{{$i.Name}}</td> -->
+    <td class="quantity">{{$i.Quantity}}</td>
+    <td class="price">{{$i.Price}}</td>
+</tr> 
+{{end}}
+</table>
+
+</div>
+<div id="footer">
+<span id="footer-text">© Akshat Batra 2023</span>
+</div>
+<script>
+var totalAmount = 0;
+
+{{ if .FromCreatePrescription }}
+if (document.location.href.includes("submit_prescription")) {
+    let pagePath = "/prescription/" + document.querySelector('input[name="prescription-id"]').value;
+    pagePath += "?from=create_prescription";
+    window.history.pushState("", "Prescription", pagePath);
+}
+{{ end }}
+
+new QRCode(document.getElementById("qr-code"), {
+    text: document.location.href.split("?")[0],
+    width: 250,
+    height: 250
+});
+document.querySelectorAll(".price").forEach((elem) => {
+    totalAmount += parseFloat(elem.innerText);
+});
+document.querySelector("#pricing-box").innerHTML = "<span id='total-amount'>◉ Total Amount ◉</span><br> ₹ " + totalAmount.toFixed(2).toString();
+</script>
+<script type="module" src="/js/see_prescription.js"></script>
+</body>
+</html>

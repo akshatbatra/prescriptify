@@ -1,0 +1,73 @@
+<!DOCTPYE html>
+<head>
+<title>Prescriptify - Revolutionizing Prescriptions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/css/main.css">
+<script src="/js/index.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"></script>
+</head>
+<body>
+<div class="strip" id="header">
+<span id="logo" onclick="document.location.href = document.location.origin;">Prescriptify</span>
+<span id="prototype">Prototype v1</span>
+</div>
+<hr id="separator">
+<hr id="separator">
+<div id="main-content">
+<video id="scanner"></video>
+<div id="mode-selector">
+<div>
+<a href="create_prescription"><button type="button" class="mode-button"><i class="fa-solid fa-user-doctor"></i>&nbspCreate Prescription</button></a>
+</div>
+<div>
+<button type="button" class="mode-button" id="qr-scan-button"><i class="fa-solid fa-qrcode"></i>&nbspScan QR / Aadhaar</button>
+</div>
+</div>
+<div id="slogan-text">
+</div>
+</div>
+<div id="footer">
+<span id="footer-text">© Akshat Batra 2023</span>
+</div>
+<script type="module">
+import QrScanner from "https://nimiq.github.io/qr-scanner/qr-scanner.min.js";
+function handleScannedQR(result, vidElem, qrScanner) {
+    qrScanner.destroy();
+    vidElem.style.display = "none";
+    if (result.data.startsWith(document.location.origin + "/prescription/")) {
+        document.location.href = result.data;
+    }
+    else {
+        fetch("/prescription/get_linked", {
+            method: "POST",
+            body: JSON.stringify({qr_data: btoa(result.data)})
+        })
+          .then((response) => {
+              if (response.ok) {
+                  return response.json();
+              }
+              else if (response.status == 400) {
+                  alert("ERROR: Scanned QR code not linked with any prescription.");
+              }
+          })
+          .then((jsonData) => {
+              if (jsonData !== undefined) {
+                  document.location.href = document.location.origin + "/prescription/" + jsonData["prescription_id"];
+              }
+          });
+    }
+}
+function startScanner() {
+    let vidElem = document.getElementById("scanner");
+    vidElem.style.display = "block";
+    const qrScanner = new QrScanner(
+        vidElem,
+        result => handleScannedQR(result, vidElem, qrScanner),
+        {preferredCamera: 'environment'}
+    );
+    qrScanner.start();
+}
+document.getElementById("qr-scan-button").addEventListener("click", startScanner);
+</script>
+</body>
+</html>

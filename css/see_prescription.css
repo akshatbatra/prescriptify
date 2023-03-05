@@ -1,0 +1,46 @@
+#qr-pricing {
+    display: flex;
+    flex-direction: column;
+}
+
+#qr-code {
+    margin: 0 auto;
+}
+
+#prescription-table td.price {
+    vertical-align: inherit;
+}
+
+#pricing-box {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px auto;
+    background-color: #00b327;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 1px black;
+    border-radius: 20px;
+    width: 250px;
+}
+
+#total-amount {
+    font-size: 20px;
+}
+
+#link-aadhaar-button {
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
+    margin: 0 auto;
+    background-color: #de1b21;
+    cursor: pointer;
+    color: white;
+    border: 4px outset lightgreen;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+#link-aadhaar-button:hover {
+    transform: scale(1.06);
+    background-color: #ff2b2b;
+}
